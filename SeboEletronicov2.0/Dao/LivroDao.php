@@ -2,7 +2,7 @@
 
 include "../Utilidades/ConexaoComBanco.php";
 
-class LivroDao {
+class LivroDao{
     
     public function salvaLivro($livro, $id_dono){
 
@@ -106,5 +106,4 @@ class LivroDao {
     }
     
 }
-?>
 

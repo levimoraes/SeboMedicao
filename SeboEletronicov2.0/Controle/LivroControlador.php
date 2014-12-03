@@ -1,6 +1,6 @@
 <?php
 
-include '../Modelo/Livro.php';
+require_once '../autoload.php';
     
 class LivroControlador {
     
@@ -17,7 +17,10 @@ class LivroControlador {
             echo "<script>window.location='http://localhost/SeboEletronicov2.0/Visao/cadastrarLivro.php';</script>";
             exit;    
         }
-        return LivroDao::salvaLivro($livro, $id_dono);
+        
+        $livroDao = new LivroDao();
+        
+        return $livroDao->salvaLivro($livro, $id_dono);
     }
     
     public function pesquisaLivro($titulo, $estadoNovo, $estadoUsado, $disponibilidadeVenda, $disponibilidadeTroca){

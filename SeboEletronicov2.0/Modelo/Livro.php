@@ -1,11 +1,6 @@
 <?php
 
-include '../Dao/LivroDao.php';
-include '../Utilidades/ValidaDados.php';
-include '../Utilidades/ExcessaoNomeInvalido.php';
-include '../Utilidades/ExcessaoTituloInvalido.php';
-include '../Utilidades/ExcessaoEditoraInvalida.php';
-
+require_once '../autoload.php';
 class Livro {
     
     private $titulo;

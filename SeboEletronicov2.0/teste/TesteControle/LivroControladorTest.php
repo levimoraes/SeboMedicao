@@ -1,13 +1,6 @@
 <?php
 
-require_once "../../Modelo/Livro.php";
-require_once "../../Controle/LivroControlador.php";
-require_once "../../Dao/LivroDao.php";
-require_once "../../Utilidades/ValidaDados.php";
-require_once "../../Utilidades/ExcessaoNomeInvalido.php";
-require_once "../../Utilidades/ExcessaoTituloInvalido.php";
-require_once "../../Utilidades/ExcessaoEditoraInvalida.php";
-require_once "../../Utilidades/ConexaoComBanco.php";
+require_once "../autoload.php";
 
 class LivroControladorTest extends PHPUnit_Framework_TestCase{
     
@@ -83,5 +76,4 @@ class LivroControladorTest extends PHPUnit_Framework_TestCase{
 //    
     }
 
-?>
 

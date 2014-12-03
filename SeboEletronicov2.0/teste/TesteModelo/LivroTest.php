@@ -1,10 +1,6 @@
 <?php
 
-require_once "../../Modelo/Livro.php";
-require_once "../../Utilidades/ValidaDados.php";
-require_once "../../Utilidades/ExcessaoEditoraInvalida.php";
-require_once "../../Utilidades/ExcessaoTituloInvalido.php";
-require_once "../../Utilidades/ExcessaoNomeInvalido.php";
+require_once "../autoload.php";
 
 class LivroTest extends PHPUnit_Framework_TestCase{
 
