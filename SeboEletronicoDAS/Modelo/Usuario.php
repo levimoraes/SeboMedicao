@@ -1,11 +1,6 @@
 ﻿<?php
 
-include_once '../Utilidades/ValidaDados.php';
-include_once '../Utilidades/ExcessaoNomeInvalido.php';
-include_once '../Utilidades/ExcessaoTelefoneInvalido.php';
-include_once '../Utilidades/ExcessaoEmailInvalido.php';
-include_once '../Utilidades/ExcessaoSenhaInvalida.php';
-include_once '../Dao/UsuarioDao.php';
+require_once "../autoload.php";
 
 class Usuario {
     

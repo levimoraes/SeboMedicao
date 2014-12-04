@@ -1,9 +1,6 @@
 <?php
 
-include_once '../Utilidades/ExcessaoNomeInvalido.php';
-include_once '../Utilidades/ExcessaoTituloInvalido.php';
-include_once '../Utilidades/ExcessaoEditoraInvalida.php';
-include_once '../Utilidades/ValidaDados.php';
+require_once "../autoload.php";
 
 class Livro {
     

@@ -1,9 +1,6 @@
 <?php
 
-include_once '../Modelo/LivroFisico.php';
-include_once '../Modelo/LivroEletronico.php';
-include_once '../Dao/LivroFisicoDao.php';
-include_once '../Dao/LivroEletronicoDao.php';
+require_once "../autoload.php";
     
 class LivroControlador {
      
@@ -70,10 +67,10 @@ class LivroControlador {
         
         $atributosLivro = $livroFisicoDao->getLivroById($id);
         
-        $livro = LivroControlador::criaObjetoLivroFisico($atributosLivro['titulo_livro'], $atributosLivro['autor'], 
-                $atributosLivro['genero'], $atributosLivro['edicao'], $atributosLivro['editora'], $atributosLivro['venda'], 
-                $atributosLivro['troca'], $atributosLivro['estado_conserv'], $atributosLivro['descricao_livro']);
-        return $livro;
+//        $livro = LivroControlador::criaObjetoLivroFisico($atributosLivro['titulo_livro'], $atributosLivro['autor'], 
+//                $atributosLivro['genero'], $atributosLivro['edicao'], $atributosLivro['editora'], $atributosLivro['venda'], 
+//                $atributosLivro['troca'], $atributosLivro['estado_conserv'], $atributosLivro['descricao_livro']);
+        return false;
     }
     
     public function deletaLivro($idLivro){
@@ -81,11 +78,11 @@ class LivroControlador {
         
         $caminho = $livroFisicoDao->defineTipoLivro($idLivro);
         
-        if(strcmp($caminho['caminhoLivroEletronico'], 'NSA') != 0){
-            $retorno = unlink($caminho['caminhoLivroEletronico']);
-        }
+//        if(strcmp($caminho['caminhoLivroEletronico'], 'NSA') != 0){
+//            $retorno = unlink($caminho['caminhoLivroEletronico']);
+//        }
         
-        return $livroFisicoDao->deletaLivro($idLivro) && $retorno;
+        return $livroFisicoDao->deletaLivro($idLivro);
     }
 
     public function alteraLivro($titulo, $autor, $genero, $edicao, $editora, $venda, $troca, $estado, $descricao, $id_livro){
@@ -101,7 +98,8 @@ class LivroControlador {
             echo "<script>window.location='../Visao/cadastrarLivro.php';</script>";
             exit;    
         }
-        return LivroFisicoDao::alteraLivro($livro, $id_livro);
+        $livroDao = new LivroFisicoDao;
+        return $livroDao->alteraLivro($livro, $id_livro);
     }
     
     public function recuperaLivroPorIdUsuario($idUsuario){

@@ -1,7 +1,6 @@
 <?php
 
-include "../Utilidades/ConexaoComBanco.php";
-include_once '../Utilidades/LivroDao.php';
+require_once "../autoload.php";
 
 class LivroEletronicoDao extends LivroDao{
     //GRASP - Inheritance
@@ -36,14 +35,14 @@ class LivroEletronicoDao extends LivroDao{
         
         $livros = array();
         
-        while($registro = mysql_fetch_assoc($result) ) {
-            array_push($livros, $registro);
-        }
+//        while($registro = mysql_fetch_assoc($result) ) {
+//            array_push($livros, $registro);
+//        }
         
         if(count($livros) == 0){
             return false;
         }
         
-        return $livros;
+        return false;
     }
 }

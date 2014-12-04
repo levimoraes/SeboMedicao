@@ -1,17 +1,13 @@
 <?php
 
-require_once "../../Modelo/Livro.php";
-require_once "../../Utilidades/ValidaDados.php";
-require_once "../../Utilidades/ExcessaoEditoraInvalida.php";
-require_once "../../Utilidades/ExcessaoTituloInvalido.php";
-require_once "../../Utilidades/ExcessaoNomeInvalido.php";
+require_once "../autoload.php";
 
 class LivroTest extends PHPUnit_Framework_TestCase{
 
 	protected $livroTeste;
 
 	protected function setUp(){
-		$this->livroTeste = new Livro('calculo 1', 'Thomas', 'engenharia', 2, 'editora teste', 'venda', 'troca', 'novo', 'livro e muito legal');
+		$this->livroTeste = new LivroFisico('calculo 1', 'Thomas', 'engenharia', 2, 'editora teste',  'livro e muito legal', 'venda', 'troca', 'novo');
 	}
 
 	protected function tearDown(){

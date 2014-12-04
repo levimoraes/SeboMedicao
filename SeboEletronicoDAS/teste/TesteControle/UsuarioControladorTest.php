@@ -1,14 +1,6 @@
 <?php
 
-require_once "../../Modelo/Usuario.php";
-require_once "../../Controle/UsuarioControlador.php";
-require_once "../../Dao/UsuarioDao.php";
-require_once "../../Utilidades/ValidaDados.php";
-require_once "../../Utilidades/ExcessaoNomeInvalido.php";
-require_once "../../Utilidades/ExcessaoSenhaInvalida.php";
-require_once "../../Utilidades/ExcessaoTelefoneInvalido.php";
-require_once "../../Utilidades/ExcessaoEmailInvalido.php";
-require_once "../../Utilidades/ConexaoComBanco.php";
+require_once "../autoload.php";
 
 class UsuarioControladorTest extends PHPUnit_Framework_TestCase {
 
@@ -28,7 +20,7 @@ class UsuarioControladorTest extends PHPUnit_Framework_TestCase {
 
     public function testSalvaUsuario() {
         $senha = array(123123,123123);
-        $retorno = $this->usuarioControladorTest->salvaUsuario('lucas', 98989898, 'lucas@lucas.com', $senha);
+        $retorno = $this->usuarioControladorTest->salvaUsuario('lucas', 'lucas@lucas.com',98989898, $senha);
         $this->assertTrue($retorno);
     }
     

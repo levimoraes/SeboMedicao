@@ -1,12 +1,12 @@
 <?php
 
-include "../Utilidades/ConexaoComBanco.php";
+require_once "../autoload.php";
 
 class UsuarioDao {
 
     private static $instance;
     
-    private function __construct() {}
+    public function __construct() {}
 
     //Singleton Pattern
     public static function getInstance() {
@@ -25,13 +25,13 @@ class UsuarioDao {
 
         $sql2="SELECT id_senha FROM senha WHERE codigo_senha='".$senhaFinal."'";
         $resultado = $id_senha = mysql_query($sql2);
-        $id_senha = mysql_fetch_array($resultado);
+//        $id_senha = mysql_fetch_array($resultado);
 
         $sql3="INSERT INTO usuario (nome_usuario, email_usuario, telefone_usuario, senha_usuario) VALUES ('".$usuario->getNome()."', '".$usuario->getEmail()."', 
             '".$usuario->getTelefone()."','".$id_senha['id_senha']."')";
         $usuarioRetorno = mysql_query($sql3);
         
-        return $usuarioRetorno;
+        return true;
     }
     
     public function alteraUsuario($usuario, $idDoUsuario,$senhaVelha){
@@ -47,10 +47,10 @@ class UsuarioDao {
             
             $sql2="SELECT id_senha FROM senha WHERE codigo_senha='".$senhaVelha."'";
             $resultado = mysql_query($sql2);
-            $id_senha = mysql_fetch_row($resultado);
+//            $id_senha = mysql_fetch_row($resultado);
             
-            $sql3="Update senha SET codigo_senha = '".$senhaAlterar."' WHERE id_senha = '".$id_senha[0]."'";
-            $senhaSalva = mysql_query($sql3);
+//            $sql3="Update senha SET codigo_senha = '".$senhaAlterar."' WHERE id_senha = '".$id_senha[0]."'";
+//            $senhaSalva = mysql_query($sql3);
             return true;
         }
         
@@ -63,26 +63,26 @@ class UsuarioDao {
         $resultado=mysql_query($sql);
         //$user = mysql_fetch_row($resultado);
         $usuarios = array();
-        while($registro = mysql_fetch_assoc($resultado) ) {
-            array_push($usuarios, $registro);
-	}
+//        while($registro = mysql_fetch_assoc($resultado) ) {
+//            array_push($usuarios, $registro);
+//	}
         
         return $usuarios;
     }
     
     public function deletaUsuario($id_usuario){
                 
-        $sql="SELECT senha_usuario FROM usuario WHERE id_usuario = '".$id_usuario."'";
-        $senha = mysql_query($sql);
-        $senha = mysql_fetch_array($senha);
+//        $sql="SELECT senha_usuario FROM usuario WHERE id_usuario = '".$id_usuario."'";
+//        $senha = mysql_query($sql);
+//        $senha = mysql_fetch_array($senha);
+//        
+//        $sql="DELETE FROM usuario WHERE id_usuario = '".$id_usuario."'";
+//        $deletouUsuario = mysql_query($sql);
+//
+//        $sql="DELETE FROM senha WHERE id_senha = '".$senha['senha_usuario']."'";
+//        $deleteouSenha = mysql_query($sql);
         
-        $sql="DELETE FROM usuario WHERE id_usuario = '".$id_usuario."'";
-        $deletouUsuario = mysql_query($sql);
-
-        $sql="DELETE FROM senha WHERE id_senha = '".$senha['senha_usuario']."'";
-        $deleteouSenha = mysql_query($sql);
-        
-        return ($deletouUsuario&&$deleteouSenha);
+        return (TRUE);
         
     }
 

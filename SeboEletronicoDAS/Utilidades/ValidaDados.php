@@ -2,17 +2,17 @@
 
 class ValidaDados {
 
-        public function validaCamposNulos($parametro){
+        public static function validaCamposNulos($parametro){
             return !(empty($parametro));
             //retorna verdadeiro caso a variavel esteja vazia
             //com isso, o valor false eh invertido e enviado como true
         }
         
-        public function validaSenhaNula($senha){
+        public static function validaSenhaNula($senha){
             return (!(empty($senha[0])) && !(empty($senha[1])));
         }
         
-        public function validaNome($nome){
+        public static function validaNome($nome){
 
             $caracteresValidos = '. abcdefghijklmnopqrstuvwxyzçãõáíóúàòìùéèê';
             
@@ -28,13 +28,13 @@ class ValidaDados {
             }
         }
         
-        public function validaEmail($email){
+        public static function validaEmail($email){
            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
                 return 1;
            }
         }
         
-        public function validaTelefone($telefone){
+        public static function validaTelefone($telefone){
             
             if(!filter_var($telefone, FILTER_VALIDATE_INT)){
                 return 1;
@@ -43,7 +43,7 @@ class ValidaDados {
             }
         }
         
-        public function validaSenha($senha){
+        public static function validaSenha($senha){
 
             if( !filter_var($senha[0], FILTER_VALIDATE_INT)){//caracter invalido
                 return 1;

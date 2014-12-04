@@ -2,6 +2,10 @@
     <testsuite name="Testes">
         <directory>./</directory>
     </testsuite>
+    <logging>
+        <log type="coverage-html" target="build/coverage"/>
+        <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
     <filter>
         <whitelist>
             <directory suffix=".php">../</directory>

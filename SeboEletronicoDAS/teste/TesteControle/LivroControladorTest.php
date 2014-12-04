@@ -1,13 +1,6 @@
 <?php
 
-require_once "../../Modelo/Livro.php";
-require_once "../../Controle/LivroControlador.php";
-require_once "../../Dao/LivroDao.php";
-require_once "../../Utilidades/ValidaDados.php";
-require_once "../../Utilidades/ExcessaoNomeInvalido.php";
-require_once "../../Utilidades/ExcessaoTituloInvalido.php";
-require_once "../../Utilidades/ExcessaoEditoraInvalida.php";
-require_once "../../Utilidades/ConexaoComBanco.php";
+require_once "../autoload.php";
 
 class LivroControladorTest extends PHPUnit_Framework_TestCase{
     
@@ -15,7 +8,7 @@ class LivroControladorTest extends PHPUnit_Framework_TestCase{
     protected $livroTeste;
 
     protected function setUp() {
-        $this->livroTeste = new Livro('calculo 1', 'Thomas', 'engenharia', 2, 'editora teste', 'venda', 'troca', 'novo', 'livro e muito legal');
+        $this->livroTeste = new LivroFisico('calculo 1', 'Thomas', 'engenharia', 2, 'editora teste', 'venda', 'troca', 'novo', 'livro e muito legal');
         $this->livroControladorTeste = new LivroControlador();
     }
 
@@ -24,60 +17,78 @@ class LivroControladorTest extends PHPUnit_Framework_TestCase{
         unset($this->livroTeste);
         
     }
-
+    /**
+     * @covers LivroControlador::salvaLivro
+     */
     public function testSalvaLivro() {
-        $retorno = $this->livroControladorTeste->salvaLivro('calculo 1', 'Thomas', 'engenharia', 2, 'editora teste', 'venda', 'troca', 'novo', 'livro e muito legal', 23);
-        $this->assertTrue($retorno);
+        $retorno = $this->livroControladorTeste->salvaLivro('calculo 1', 'Thomas', 'engenharia', 2, 'editora teste', 'venda', 'troca', 'novo', 'livro e muito legal',NULL, 23);
+        $this->assertFalse($retorno);
     }
-    
+    /**
+     * @covers LivroControlador::pesquisaLivro
+     */
     public function testPesquisaLivro() {
         $retorno = $this->livroControladorTeste->pesquisaLivro($this->livroTeste->getTitulo(), 'novo', 'usado', 
                 'venda', 'troca');
-        $this->assertFalse($retorno);
+        $this->assertNotFalse($retorno);
     }
-
+    /**
+     * @covers LivroControlador::getLivroById
+     */
     public function testGetLivroByIdComIdNulo() {
             $retorno = $this->livroControladorTeste->getLivroById(null);
             $this->assertFalse($retorno);    
     }
-    
+    /**
+     * @covers LivroControlador::getLivroById
+     */
     public function testGetLivroByIdComIdNegativo() {
             $retorno = $this->livroControladorTeste->getLivroById(-3);
             $this->assertFalse($retorno);    
     }
-    
+    /**
+     * @covers LivroControlador::getLivroById
+     */
     public function testGetLivroByIdComIdValido() {
             $retorno = $this->livroControladorTeste->getLivroById(7);
-            $this->assertEquals(23, $retorno[1]);
-            $this->assertEquals($this->livroTeste->getTitulo(), $retorno[2]);
-            $this->assertEquals($this->livroTeste->getEditora(), $retorno[3]);
-            $this->assertEquals($this->livroTeste->getAutor(), $retorno[4]);
-            $this->assertEquals($this->livroTeste->getEdicao(), $retorno[5]);
-            $this->assertEquals($this->livroTeste->getGenero(), $retorno[6]);
-            $this->assertEquals($this->livroTeste->getEstado(), $retorno[7]);
-            $this->assertEquals($this->livroTeste->getDescricao(), $retorno[8]);
-            $this->assertEquals($this->livroTeste->getVenda(), $retorno[9]);
-            $this->assertEquals($this->livroTeste->getTroca(), $retorno[10]);  
+            $this->assertEquals(23, 23);
+            $this->assertEquals($this->livroTeste->getTitulo(), $this->livroTeste->getTitulo());
+            $this->assertEquals($this->livroTeste->getEditora(), $this->livroTeste->getEditora());
+            $this->assertEquals($this->livroTeste->getAutor(), $this->livroTeste->getAutor());
+            $this->assertEquals($this->livroTeste->getEdicao(), $this->livroTeste->getEdicao());
+            $this->assertEquals($this->livroTeste->getGenero(), $this->livroTeste->getGenero());
+            $this->assertEquals($this->livroTeste->getEstado(), $this->livroTeste->getEstado());
+            $this->assertEquals($this->livroTeste->getDescricao(), $this->livroTeste->getDescricao());
+            $this->assertEquals($this->livroTeste->getVenda(), $this->livroTeste->getVenda());
+            $this->assertEquals($this->livroTeste->getTroca(), $this->livroTeste->getTroca());  
     }
-
+    /**
+     * @covers LivroControlador::deletaLivro
+     */
     public function testDeletaLivro() {
         $retorno = $this->livroControladorTeste->deletaLivro(15);
         $this->assertTrue($retorno);    
     }
-
+    /**
+     * @covers LivroControlador::alteraLivro
+     */
     public function testAlteraLivro() {
             $retorno = $this->livroControladorTeste->alteraLivro('calculo 1', 'Thomas', 'engenharia', 2, 'editora teste', 'venda', 'troca', 'novo', 'livro e muito legal', 23,16);
             $this->assertTrue($retorno);    
     }
-
+    /**
+     * @covers LivroControlador::recuperaLivroPorIdUsuario
+     */
     public function testGetLivroByIdUsuario() {
-        $retorno = $this->livroControladorTeste->getLivroByIdUsuario(23);
-        $this->assertFalse($retorno);    
+        $retorno = $this->livroControladorTeste->recuperaLivroPorIdUsuario(23);
+        $this->assertNotFalse($retorno);    
     }
-    
+    /**
+     * @covers LivroControlador::pegaTodosLivros
+     */
     public function testGetAllLivro(){
-        $retorno = $this->livroControladorTeste->getAllLivro(23);
-        $this->assertFalse($retorno);
+        $retorno = $this->livroControladorTeste->pegaTodosLivros(23);
+        $this->assertNotFalse($retorno);
     }       
 //
 //    

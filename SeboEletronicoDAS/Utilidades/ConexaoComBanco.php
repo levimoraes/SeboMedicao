@@ -2,7 +2,7 @@
     
     $server = "localhost";
     $username = "root";
-    $senha = "";
+    $senha = "root";
     $dbcon = mysql_connect($server, $username, $senha);
 
     if(!$dbcon){
