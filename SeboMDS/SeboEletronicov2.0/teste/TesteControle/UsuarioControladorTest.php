@@ -9,7 +9,7 @@ class UsuarioControladorTest extends PHPUnit_Framework_TestCase {
     
     protected function setUp() {
         $senha = array(123123,123123);
-        $this->usuario = new Usuario('lucas', 98989898, 'lucas@lucas.com', $senha);
+        $this->usuario = new Usuario('lucas', 98989898, 'lucas@lucas.com',$senha);
         $this->usuarioControladorTest = new UsuarioControlador();
     }
 
@@ -20,7 +20,7 @@ class UsuarioControladorTest extends PHPUnit_Framework_TestCase {
 
     public function testSalvaUsuario() {
         $senha = array(123123,123123);
-        $retorno = $this->usuarioControladorTest->salvaUsuario('lucas', 98989898, 'lucas@lucas.com', $senha);
+        $retorno = $this->usuarioControladorTest->salvaUsuario('lucas', 'lucas@lucas.com',98989898, $senha);
         $this->assertTrue($retorno);
     }
     
@@ -29,7 +29,9 @@ class UsuarioControladorTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testAlteraUsuario(){
-        $retorno = $this->usuarioControladorTest->alteraUsuario($this->usuario, 11, 123456);
+        
+        $senha = array(123123,123123);
+        $retorno = $this->usuarioControladorTest->alterarCadastro('lucas', 'lucas@lucas.com',98989898, $senha, 11, 123456);
         $this->assertTrue($retorno);
     }
     
@@ -40,23 +42,23 @@ class UsuarioControladorTest extends PHPUnit_Framework_TestCase {
     
     public function testDeletaUsuario(){
         $senha = $this->usuario->getSenha();
-        $retorno = $this->usuarioControladorTest->deletaUsuario($this->usuario->getEmail(), $senha[0]);
+        $retorno = $this->usuarioControladorTest->deletaCadastro($this->usuario->getEmail(), $senha[0]);
         $this->assertTrue($retorno);
     }
     
     public function testGetCadastradosPorIdComIdNulo(){
-        $retorno = $this->usuarioControladorTest->getCadastradosPorId(null);
+        $retorno = $this->usuarioControladorTest->checaCadastroId(null);
         $this->assertFalse($retorno);
     }
     
     public function testGetCadastradosPorIdComIdInvalido(){
-        $retorno = $this->usuarioControladorTest->getCadastradosPorId(-2);
+        $retorno = $this->usuarioControladorTest->checaCadastroId(-2);
         $this->assertFalse($retorno);
     }
     
     public function testGetCadastradosPorIdComIdValido(){
         $senha = $this->usuario->getSenha();
-        $retorno = $this->usuarioControladorTest->getCadastradosPorId(23);
+        $retorno = $this->usuarioControladorTest->checaCadastroId(23);
         $this->assertEquals($this->usuario->getEmail(), $retorno[4]);
         $this->assertEquals($this->usuario->getNome(), $retorno[1]);
         $this->assertEquals($this->usuario->getTelefone(), $retorno[3]);

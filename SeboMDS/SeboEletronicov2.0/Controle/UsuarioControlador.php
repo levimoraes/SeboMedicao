@@ -12,11 +12,13 @@ class UsuarioControlador {
                 echo "<script>window.location='http://localhost/SeboEletronicov2.0/Visao/cadastrarUsuario.php'; </script>";
                 exit;    
             }
-           return UsuarioDao::salvaUsuario($usuario);
+           $usuarioDao = new UsuarioDao();
+           return $usuarioDao->salvaUsuario($usuario);
         }
 
         public function checaCadastroId($id){
-            return UsuarioDao::getCadastradosPorId($id);
+            $usuarioDao = new UsuarioDao();
+           return $usuarioDao->getCadastradosPorId($id);
         }
 
         public function alterarCadastro($nome, $email, $telefone, $senha, $id, $senhaVelha){
@@ -28,18 +30,21 @@ class UsuarioControlador {
                 echo "<script>window.location='http://localhost/SeboEletronicov2.0/Visao/alteraUsuario.php'; </script>";
                 exit;    
             }
-           return UsuarioDao::alteraUsuario($usuario,$id, $senhaVelha);
+           $usuarioDao = new UsuarioDao();
+           return $usuarioDao->alteraUsuario($usuario,$id, $senhaVelha);
         
         }
         
         public function deletaCadastro($email, $senha){
    
-            return UsuarioDao::deletaUsuario($email, $senha);
+            $usuarioDao = new UsuarioDao();
+           return $usuarioDao->deletaUsuario($email, $senha);
    
         }
 
         public function pesquisaUsuario($nome){
-            return UsuarioDao::pesquisaUsuario($nome);
+            $usuarioDao = new UsuarioDao();
+           return $usuarioDao->pesquisaUsuario($nome);
         } 
 }
 
